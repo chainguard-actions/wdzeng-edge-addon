@@ -10,6 +10,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 |---------|-----|-----------------|
 | v1.2.5 | [`v1.2.5`](https://github.com/chainguard-actions/wdzeng-edge-addon/tree/v1.2.5) | [`e307af4`](https://github.com/wdzeng/edge-addon/commit/e307af4adb6d4e1c12387dc7d6bd545dcd075909) |
 | v2.0.0 | [`v2.0.0`](https://github.com/chainguard-actions/wdzeng-edge-addon/tree/v2.0.0) | [`98c1ad5`](https://github.com/wdzeng/edge-addon/commit/98c1ad5af5f63e716128644bacb2d8b52a82f045) |
+| v2.1.0 | [`v2.1.0`](https://github.com/chainguard-actions/wdzeng-edge-addon/tree/v2.1.0) | [`d4db1ee`](https://github.com/wdzeng/edge-addon/commit/d4db1eea77297a24d799394dec87e8912e0902f9) |
 
 ## Privacy
 
