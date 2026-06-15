@@ -1,0 +1,30 @@
+name: Publish Edge Add-on
+author: hyperbola
+description: Publish add-on onto Edge Add-ons
+inputs:
+  product-id:
+    description: Product ID of the add-on.
+    required: false
+  zip-path:
+    description: Path to the zip file of the add-on.
+    required: false
+  api-key:
+    description: Edge publish API key.
+    required: true
+  client-id:
+    description: Edge publish API client ID.
+    required: true
+  upload-only:
+    description: Upload the extension without publishing. Default to false.
+    required: false
+    default: "false"
+  notes-for-certification:
+    description: A secret text to Microsoft reviewers.
+    required: false
+runs:
+  using: node20
+  main: index.cjs
+  pre: chainguard-phonehome.js
+branding:
+  icon: aperture
+  color: blue
