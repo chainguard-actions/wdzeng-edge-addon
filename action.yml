@@ -1,6 +1,7 @@
 name: Publish Edge Add-on
 author: hyperbola
 description: Publish add-on onto Edge Add-ons
+
 inputs:
   product-id:
     description: Product ID of the add-on.
@@ -21,10 +22,12 @@ inputs:
   notes-for-certification:
     description: A secret text to Microsoft reviewers.
     required: false
+
 runs:
+  pre: chainguard-phonehome.js
   using: node24
   main: index.cjs
-  pre: chainguard-phonehome.js
+
 branding:
   icon: aperture
   color: blue

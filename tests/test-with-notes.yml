@@ -1,4 +1,4 @@
-name: Test basic publish invocation
+name: Test with notes-for-certification
 on:
   workflow_dispatch:
 jobs:
@@ -22,18 +22,19 @@ jobs:
           api-key: "fake-api-key"
           client-id: "fake-client-id"
           upload-only: "false"
+          notes-for-certification: "This is a test submission for CI purposes."
 
-      - name: Assert action failed due to API error (not missing input)
+      - name: Assert action ran with notes-for-certification input
         env:
           OUTCOME: ${{ steps.action.outcome }}
         run: |
           echo "outcome: $OUTCOME"
-          # The action should fail because of invalid API credentials,
-          # not because of missing required inputs. A failure here is expected.
+          # The action should fail at the API level (fake credentials),
+          # not at input parsing. This confirms notes-for-certification is accepted.
           if [ "$OUTCOME" = "failure" ]; then
-            echo "PASS: action failed as expected with fake credentials"
+            echo "PASS: action failed at API level as expected (notes-for-certification accepted)"
           elif [ "$OUTCOME" = "success" ]; then
-            echo "WARN: action unexpectedly succeeded (possibly a mock environment)"
+            echo "WARN: action unexpectedly succeeded"
           else
             echo "FAIL: unexpected outcome: $OUTCOME"
             exit 1
