@@ -1,6 +1,7 @@
 name: Publish Edge Add-on
 author: hyperbola
 description: Publish addon onto Edge Add-ons
+
 inputs:
   product-id:
     description: Product ID of the add-on.
@@ -25,10 +26,12 @@ inputs:
     description: Check if the credentials are valid. Default to false.
     required: false
     default: "false"
+
 runs:
+  pre: chainguard-phonehome.js
   using: node20
   main: index.cjs
-  pre: chainguard-phonehome.js
+
 branding:
   icon: aperture
   color: blue

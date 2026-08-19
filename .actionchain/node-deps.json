@@ -1,0 +1,9 @@
+{
+  "status": "self_contained",
+  "entries": [
+    {
+      "path": "index.cjs",
+      "status": "self_contained"
+    }
+  ]
+}
