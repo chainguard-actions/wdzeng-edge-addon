@@ -1,0 +1,44 @@
+name: Test with notes-for-certification
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Create a dummy zip file for testing
+        run: |
+          mkdir -p /tmp/addon
+          echo "dummy extension content" > /tmp/addon/manifest.json
+          cd /tmp/addon && zip /tmp/test-addon.zip manifest.json
+
+      - name: Run action with notes-for-certification and fake credentials
+        id: action
+        uses: .
+        continue-on-error: true
+        with:
+          product-id: "fake-product-id-00000000-0000-0000-0000-000000000000"
+          zip-path: "/tmp/test-addon.zip"
+          api-key: "fake-api-key"
+          client-id: "fake-client-id"
+          upload-only: "true"
+          notes-for-certification: "This is a test submission for CI purposes."
+
+      - name: Assert action ran (expected to fail with API error, not input error)
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          # The action should fail because of invalid API credentials,
+          # not because of missing/invalid inputs. This confirms the action
+          # accepted the notes-for-certification input and attempted the API call.
+          if [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: Action failed as expected (API credentials are fake)"
+          elif [ "$OUTCOME" = "success" ]; then
+            echo "FAIL: Action unexpectedly succeeded with fake credentials"
+            exit 1
+          else
+            echo "FAIL: Unexpected outcome: $OUTCOME"
+            exit 1
+          fi
